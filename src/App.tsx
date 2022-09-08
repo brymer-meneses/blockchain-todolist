@@ -3,12 +3,14 @@
 import "./App.css";
 import Backdrop from "./components/Backdrop";
 import Dashboard from "./components/Dashboard";
+import Header from "./components/Header";
 
 function App() {
   // const [count, setCount] = useState(0);
   return (
     <div className="App">
-      <Dashboard />
+      <Header/>
+      <Dashboard/>
       <Backdrop />
     </div>
   );

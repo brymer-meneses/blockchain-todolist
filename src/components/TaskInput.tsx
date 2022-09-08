@@ -1,38 +1,34 @@
 import { useState } from "react";
 import "./TaskInput.css"
 
-function TaskInput() {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
+interface props {
+   handleTaskCreation: (content: string) => void
+}
+
+function TaskInput(props: props) {
   const [input, setInput] = useState("");
-  const [tip, setTip] = useState("Create task.");
 
-  const refreshTip = () => {
-    if (input.trim() === '' || input.length === 0) {
-      setTip("Create task.");
-    } else {
-      setTip("Press enter to submit task.");
-    }
-  }
-
-  const handleChange = (event) => {
+  const handleInput = (event) => { 
     setInput(event.target.value);
-    refreshTip();
   }
 
-  const handleSubmit = (event) => {
-    if (event.key == "Enter") {
-       setInput('')
-    }
-    refreshTip();
+  const handleTaskAdd = () => {
+    props.handleTaskCreation(input);
   }
-
 
   return <section className="task-input-container">
-    <h1 className="task-input-text"> {tip} </h1>
-    <input 
-      onChange={handleChange} 
-      onKeyDown={handleSubmit}
-      value={input}
-      className="task-input" type="text"/>
+    <h1 className="task-input-text"> Create Task </h1>
+    <div className="task-input">
+      <input 
+        onChange={handleInput}
+        type="text"/>
+      <FontAwesomeIcon 
+        onClick={handleTaskAdd}
+        className="task-add-icon" icon={faPlus} />
+    </div>
   </section>;
 }
 

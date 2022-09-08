@@ -1,24 +1,23 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faListCheck } from "@fortawesome/free-solid-svg-icons";
-
-import "./Dashboard.css";
-import Wallet from "./Wallet";
+import { useState } from "react";
+import Task from "./Task";
 import TaskInput from "./TaskInput";
-import Tasks from "./Tasks";
+
+type TaskArray = Array<{content: string, isCompleted: boolean}>;
 
 function Dashboard() {
+  const [tasks, setTasks] = useState<TaskArray>([]);
+
+  const handleTaskCreation = (content: string) => {
+    setTasks([...tasks, {content, isCompleted: false}])
+  }
+
   return (
     <main>
-      <section className="header">
-        <div className="title">
-          <FontAwesomeIcon className="logo" icon={faListCheck} />
-          <h1> TodoList</h1>
-        </div>
-        <Wallet />
-      </section>
       <section className="task-container">
-        <TaskInput />
-        <Tasks/>
+        <TaskInput handleTaskCreation={handleTaskCreation} />
+        { tasks.map(
+          task => <Task isCompleted={task.isCompleted} content={task.content}/>
+        )}
       </section>
     </main>
   );

@@ -12,7 +12,8 @@
 
 .task-icon {
   padding: 0 0.4rem 0 0;
-  transform: scale(2.25);
+  transform: scale(1.5);
   color: var(--white);
+  cursor: pointer;
 }
 
