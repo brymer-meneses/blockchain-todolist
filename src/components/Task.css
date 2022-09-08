@@ -1,0 +1,18 @@
+.task {
+  display: flex;
+  background: #071E34;
+  border-radius: 1.5rem;
+  margin: 2rem 0rem;
+  padding: 1rem;
+  box-shadow: 6px 6px 20px black;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-icon {
+  padding: 0 0.4rem 0 0;
+  transform: scale(2.25);
+  color: var(--white);
+}
+
