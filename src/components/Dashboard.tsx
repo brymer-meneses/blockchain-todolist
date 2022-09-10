@@ -3,6 +3,7 @@ import Task from "./Task";
 import TaskInput from "./TaskInput";
 
 import "./Dashboard.css"
+import { useAccount } from "wagmi";
 
 type Tasks = Array<{ content: string, isCompleted: boolean }>;
 
@@ -30,6 +31,10 @@ function Dashboard() {
 
   const handleSaveChanges = () => { 
   }
+
+  const address = useAccount()
+  console.log(address)
+
 
   return (
     <section>
