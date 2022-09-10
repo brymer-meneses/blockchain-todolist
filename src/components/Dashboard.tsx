@@ -2,24 +2,54 @@ import { useState } from "react";
 import Task from "./Task";
 import TaskInput from "./TaskInput";
 
-type TaskArray = Array<{content: string, isCompleted: boolean}>;
+import "./Dashboard.css"
+
+type Tasks = Array<{ content: string, isCompleted: boolean }>;
+
 
 function Dashboard() {
-  const [tasks, setTasks] = useState<TaskArray>([]);
+  const [tasks, setTasks] = useState<Tasks>([]);
 
   const handleTaskCreation = (content: string) => {
-    setTasks([...tasks, {content, isCompleted: false}])
+    setTasks([...tasks, { content, isCompleted: false }])
+  }
+
+  const handleTaskDeletion = (index: number) => {
+    setTasks(tasks.filter((_, idx) => index !== idx))
+  }
+
+  const handleTaskCompletion = (index: number) => {
+    setTasks(
+      tasks.map((task, idx) => idx === index ? { ...task, isCompleted: true } : task)
+    )
+  }
+
+  const handleDiscardChanges = () => {
+
+  }
+
+  const handleSaveChanges = () => { 
   }
 
   return (
-    <main>
-      <section className="task-container">
-        <TaskInput handleTaskCreation={handleTaskCreation} />
-        { tasks.map(
-          task => <Task isCompleted={task.isCompleted} content={task.content}/>
-        )}
-      </section>
-    </main>
+    <section>
+      <TaskInput handleTaskCreation={handleTaskCreation} />
+
+      <div className="menu">
+        <button className="button-save"onClick={handleDiscardChanges}> Save </button>
+        <button className="button-discard" onClick={handleSaveChanges}> Discard </button>
+      </div>
+
+      {tasks.map((task, index) =>
+        <Task
+          isCompleted={task.isCompleted}
+          content={task.content}
+          index={index}
+          handleTaskDeletion={handleTaskDeletion}
+          handleTaskCompletion={handleTaskCompletion}
+        />
+      )}
+    </section>
   );
 }
 

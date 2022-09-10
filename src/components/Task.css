@@ -10,10 +10,14 @@
   align-items: center;
 }
 
-.task-icon {
-  padding: 0 0.4rem 0 0;
+.button {
+  margin: 0 0.7rem;
   transform: scale(1.5);
-  color: var(--white);
   cursor: pointer;
 }
+
+.task-button {
+  padding: 0 0.4rem 0 0;
+}
+
 

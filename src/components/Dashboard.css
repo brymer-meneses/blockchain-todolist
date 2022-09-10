@@ -1,0 +1,37 @@
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.menu button {
+  box-shadow: 3px 3px 10px black;
+  width: 15vh;
+  height: 6vh;
+  border: none;
+  border-radius: 0.5rem;
+  margin: 0 0.3rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+}
+
+.menu .button-save {
+  background-color: #BED7EE;
+  color: #030B10;
+}
+
+.menu .button-discard {
+  background-color: #324758;
+  color: #E5E5E5
+}
+
+.menu .button-save:hover {
+  background-color: #8394A3;
+}
+
+.menu .button-discard:hover {
+  background-color: #2E4252;
+
+}

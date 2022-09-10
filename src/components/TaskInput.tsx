@@ -16,6 +16,8 @@ function TaskInput(props: props) {
   }
 
   const handleTaskAdd = () => {
+    if (input.trim() === '' || input.length === 0) return;
+    setInput('')
     props.handleTaskCreation(input);
   }
 
@@ -24,6 +26,7 @@ function TaskInput(props: props) {
     <div className="task-input">
       <input 
         onChange={handleInput}
+        value={input}
         type="text"/>
       <FontAwesomeIcon 
         onClick={handleTaskAdd}
