@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faListCheck } from "@fortawesome/free-solid-svg-icons";
-import Wallet from "./Wallet";
 import "./Header.css"
 
 import { ConnectButton } from '@rainbow-me/rainbowkit';
