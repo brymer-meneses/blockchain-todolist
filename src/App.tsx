@@ -4,10 +4,13 @@ import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
 
 import '@rainbow-me/rainbowkit/styles.css';
+import merge from 'lodash.merge';
 
 import {
   getDefaultWallets,
   RainbowKitProvider,
+  darkTheme,
+  Theme,
 } from '@rainbow-me/rainbowkit';
 import {
   chain,
@@ -35,10 +38,22 @@ const wagmiClient = createClient({
   provider
 })
 
+const myTheme = merge(darkTheme(), {
+  colors: {
+    accentColor: '#BED7EE',
+    accentColorForeground: '#030B10',
+    modalBackground: '#041422',
+    connectButtonInnerBackground: '#071E34',
+    connectButtonBackground: '#010405'
+  },
+} as Theme);
+
 function App() {
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider chains={chains}>
+      <RainbowKitProvider 
+        theme={myTheme}
+        chains={chains}>
         <div className="App">
           <Header/>
           <Dashboard/>

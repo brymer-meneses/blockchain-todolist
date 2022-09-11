@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Task from "./Task";
 import TaskInput from "./TaskInput";
 
@@ -35,7 +35,7 @@ class TaskOp {
   }
 
   static Delete(id: number)  {
-    return [2, id, 0,  "", ];
+    return [2, id, 0,  ""];
   }
 
   static Finish(id: number)  {
@@ -45,7 +45,7 @@ class TaskOp {
 
 function Dashboard() {
   const [tasks, setTasks] = useState<Tasks>([])
-  const [existingTasks, setSavedTasks] = useState<Tasks>([]);
+  const [preSavedTasks, setPreSavedTasks] = useState<Tasks>([]);
   const [unsavedOps, setUnsavedOps] = useState<Array<string|number>[]>([]);
 
   const { address } = useAccount()
@@ -58,9 +58,18 @@ function Dashboard() {
     onSuccess(data) {
       const values = data?.map( ({content, isCompleted}) => { return {content: content, isCompleted: isCompleted} } )
       setTasks(values);
-      setSavedTasks(values);
+      setPreSavedTasks(values);
     }
   })
+
+  const { config } = usePrepareContractWrite({
+    addressOrName: CONTRACT_ADDRESS,
+    contractInterface: JSON.stringify(contractInterface["abi"]),
+    functionName: "updateTasks",
+    args: [unsavedOps],
+  })
+
+  const { write: updateTasks } = useContractWrite(config);
 
 
   const handleTaskCreation = (content: string) => {
@@ -82,23 +91,15 @@ function Dashboard() {
   }
 
   const handleDiscardChanges = () => {
-    setTasks(existingTasks);
+    setTasks(preSavedTasks);
     setUnsavedOps([]);
   }
 
-  const { config } = usePrepareContractWrite({
-    addressOrName: CONTRACT_ADDRESS,
-    contractInterface: JSON.stringify(contractInterface["abi"]),
-    functionName: "updateTasks",
-    args: [unsavedOps],
-  })
-
-  const { write } = useContractWrite(config);
 
   const handleSaveChanges = () => {
-    write?.();
+    updateTasks?.();
 
-    setSavedTasks(tasks);
+    setPreSavedTasks(tasks);
     setUnsavedOps([]);
   }
 

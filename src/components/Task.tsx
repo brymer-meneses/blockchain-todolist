@@ -18,6 +18,7 @@ function Task(props: Task) {
 
   const handleFinish = (event) => {
     setIsCompleted(!isCompleted)
+    props.handleTaskCompletion(props.index)
   }
 
   const handleDelete = () => {
