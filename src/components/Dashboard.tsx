@@ -48,7 +48,13 @@ function Dashboard() {
   const [preSavedTasks, setPreSavedTasks] = useState<Tasks>([]);
   const [unsavedOps, setUnsavedOps] = useState<Array<string|number>[]>([]);
 
-  const { address } = useAccount()
+  const { address } = useAccount({
+    onDisconnect() {
+      setTasks([]);
+      setPreSavedTasks([]);
+      setUnsavedOps([]);
+    }
+  })
 
   useContractRead({
     addressOrName: CONTRACT_ADDRESS,
