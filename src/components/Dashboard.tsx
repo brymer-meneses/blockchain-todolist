@@ -32,8 +32,7 @@ function Dashboard() {
   const handleSaveChanges = () => { 
   }
 
-  const address = useAccount()
-  console.log(address)
+  const areMenuButtonsDisabled = unsavedOps.length === 0;
 
 
   return (
@@ -41,8 +40,16 @@ function Dashboard() {
       <TaskInput handleTaskCreation={handleTaskCreation} />
 
       <div className="menu">
-        <button className="button-save"onClick={handleDiscardChanges}> Save </button>
-        <button className="button-discard" onClick={handleSaveChanges}> Discard </button>
+        <button 
+          className={areMenuButtonsDisabled ? "button-disabled" : "button-save"} 
+          onClick={handleSaveChanges}> 
+          Save 
+        </button>
+        <button 
+          className={areMenuButtonsDisabled ? "button-disabled" : "button-discard"} 
+          onClick={handleDiscardChanges}> 
+          Discard 
+        </button>
       </div>
 
       {tasks.map((task, index) =>

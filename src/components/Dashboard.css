@@ -17,6 +17,13 @@
   font-family: "Poppins", sans-serif;
 }
 
+.menu .button-disabled {
+  background-color: transparent;
+  border: 2px solid var(--border);
+  color: var(--border);
+  box-shadow: none;
+}
+
 .menu .button-save {
   background-color: #BED7EE;
   color: #030B10;
