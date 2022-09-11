@@ -13,8 +13,8 @@ contract TodoList {
 
     mapping(address => Task[]) database;
 
-    function retrieveTasks() public view returns( Task[] memory ) {
-      return database[msg.sender];
+    function retrieveTasks(address user) public view returns( Task[] memory ) {
+      return database[user];
     }
 
     function createTask(string memory content) public {
