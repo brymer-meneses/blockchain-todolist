@@ -2,9 +2,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 80%;
+  width: 60%;
   max-width: 80rem;
-  min-width: 20rem;
 }
 
 .menu {
@@ -24,6 +23,7 @@
   font-size: 0.9rem;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
+  transition: all .2s ease-in-out;
 }
 
 .menu .button-disabled {
@@ -34,24 +34,23 @@
 }
 
 .menu .button-save {
+  background-color: #030C15;
+  color: #E5E5E5
+}
+
+.menu .button-discard {
   background-color: #BED7EE;
   color: #030B10;
 }
 
-.menu .button-discard {
-  background-color: #324758;
-  color: #E5E5E5
+.menu button:not(.button-disabled):hover {
+  transform: scale(1.05)
 }
 
-.menu .button-save:hover {
-  background-color: #8394A3;
-}
-
-.menu .button-discard:hover {
-  background-color: #2E4252;
-
-}
 
 @media only screen and (max-width: 650px) {
+  .dashboard {
+    min-width: 20rem;
+  }
 }
 

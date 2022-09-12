@@ -25,17 +25,16 @@ function Task(props: Task) {
     props.handleTaskDeletion(props.index);
   }
 
-  const color = isCompleted ?  "#404C57" : "#BDD4EA" ;
+  const color = isCompleted ?  "#030C15" : "#BDD4EA" ;
   const textDecoration = isCompleted ? "line-through" : "";
   const logo = isCompleted ? faCircleCheck : faCircle;
-
 
 
   return <div draggable className="task"> 
     <h1 style={{color: color, textDecoration: textDecoration}}>{props.content}</h1>
     <div className="task-buttons">
-      <FontAwesomeIcon style={{color: color}} className="button" onClick={handleDelete} icon={faXmark} />
-      <FontAwesomeIcon style={{color: color}} className="button" onClick={handleFinish} icon={logo} />
+      <FontAwesomeIcon style={{color: color}} className="task-button" onClick={handleDelete} icon={faXmark} />
+      <FontAwesomeIcon style={{color: color}} className="task-button" onClick={handleFinish} icon={logo} />
     </div>
   </div>
 }

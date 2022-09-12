@@ -26,6 +26,12 @@
   margin-right: 0.75rem;
   margin-left: 0.75rem;
   cursor: pointer;
+  transition: all .5s ease-in-out;
+}
+
+.task-input .add-icon:hover {
+  transform: scale(1.1);
+  color: var(--white)
 }
 
 .task-input-container h3 {

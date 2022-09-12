@@ -10,7 +10,10 @@ function Header() {
         <FontAwesomeIcon className="logo" icon={faListCheck} size="2x"/>
         <h1> TodoList</h1>
       </div>
-      <ConnectButton />
+
+      <div className="connect-button"> 
+        <ConnectButton />
+      </div>
     </section>;
 }
 
