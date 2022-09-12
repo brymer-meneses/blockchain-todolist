@@ -10,7 +10,7 @@ interface Task {
   content: string;
   index: number;
   handleTaskDeletion: (index: number) => void;
-  handleTaskCompletion: (index: number) => void;
+  handleTaskToggleCompletion: (index: number) => void;
 }
 
 function Task(props: Task) {
@@ -18,7 +18,7 @@ function Task(props: Task) {
 
   const handleFinish = (event) => {
     setIsCompleted(!isCompleted)
-    props.handleTaskCompletion(props.index)
+    props.handleTaskToggleCompletion(props.index)
   }
 
   const handleDelete = () => {

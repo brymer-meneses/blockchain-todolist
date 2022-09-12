@@ -11,14 +11,14 @@ import contractInterface from "../../build/contracts/TodoList.json"
 
 const CONTRACT_ADDRESS = "0xCA2ca507FdcdD212bDB3eECda2C1C10373524aF9";
 
+enum TaskOpKind {
+  CREATE=0,
+  DELETE=1,
+  SWAP=2,
+  FINISH=3,
+}
+
 class TaskOp {
-  // enum Operation {
-  //     CREATE,
-  //     DELETE,
-  //     SWAP,
-  //     FINISH
-  //   }
-  //
   // struct TaskOperation {
   //      Operation op;
   //      uint taskId;
@@ -27,19 +27,19 @@ class TaskOp {
   //   }
 
   static Create(id: number, content: string, )  {
-    return [0, id,  0, content, ];
+    return [TaskOpKind.CREATE, id,  0, content, ];
   }
 
   static Swap(id1: number, id2: number)  {
-    return [1, id1,  id2, ""];
+    return [TaskOpKind.SWAP, id1,  id2, ""];
   }
 
   static Delete(id: number)  {
-    return [2, id, 0,  ""];
+    return [TaskOpKind.DELETE, id, 0,  ""];
   }
 
   static Finish(id: number)  {
-    return [3, id,  0, ""];
+    return [TaskOpKind.FINISH, id,  0, ""];
   }
 }
 
@@ -88,12 +88,21 @@ function Dashboard() {
     setUnsavedOps([...unsavedOps, TaskOp.Delete(index)]);
   }
 
-  const handleTaskCompletion = (index: number) => {
-    setTasks(
-      tasks.map((task, idx) => idx === index ? { ...task, isCompleted: true } : task)
-    )
+  const handleTaskToggleCompletion = (index: number) => {
+
+    // check for toggle completion operation in the unsaved operations array,
+    // if it exists delete that operation from the unsaved operations list
+
+    const unsavedToggleCompletion = unsavedOps.find( op => op[0] === TaskOpKind.FINISH && op[1] === index);
+
+    if (unsavedToggleCompletion) {
+      setUnsavedOps(unsavedOps.filter(op => op != unsavedToggleCompletion))
+      return
+    } 
 
     setUnsavedOps([...unsavedOps, TaskOp.Finish(index)]);
+    setTasks(tasks.map((task, idx) => idx === index ? { ...task, isCompleted: true } : task))
+
   }
 
   const handleDiscardChanges = () => {
@@ -136,7 +145,7 @@ function Dashboard() {
           index={index}
           key={index}
           handleTaskDeletion={handleTaskDeletion}
-          handleTaskCompletion={handleTaskCompletion}
+          handleTaskToggleCompletion={handleTaskToggleCompletion}
         />
       )}
     </section>
