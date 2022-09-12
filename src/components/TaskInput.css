@@ -1,6 +1,6 @@
 .task-input {
-  width: 50vw;
-  height: 4vw;
+  height: 4vh;
+
   padding: 1rem;
   margin-bottom: 25px;
   border: 2px solid var(--gray);
@@ -23,7 +23,6 @@
 
 .task-input .add-icon {
   color: var(--gray);
-  transform: scale(1.5);
   margin-right: 0.75rem;
   margin-left: 0.75rem;
   cursor: pointer;

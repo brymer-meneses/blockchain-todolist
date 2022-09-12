@@ -7,7 +7,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 function Header() {
   return <section className="header">
       <div className="title">
-        <FontAwesomeIcon className="logo" icon={faListCheck} />
+        <FontAwesomeIcon className="logo" icon={faListCheck} size="2x"/>
         <h1> TodoList</h1>
       </div>
       <ConnectButton />

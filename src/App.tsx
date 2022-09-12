@@ -55,7 +55,7 @@ function App() {
         theme={myTheme}
         chains={chains}>
 
-        {/* Main app */ }
+        {/* Main app */}
         <div className="App">
           <Header/>
           <Dashboard/>

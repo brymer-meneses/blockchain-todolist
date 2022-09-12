@@ -2,7 +2,7 @@
   display: flex;
   background: #071E34;
   border-radius: 1.5rem;
-  margin: 2rem 0rem;
+  margin: 1rem 0rem;
   padding: 1rem;
   box-shadow: 6px 6px 20px black;
   flex-direction: row;
@@ -12,7 +12,6 @@
 
 .button {
   margin: 0 0.7rem;
-  transform: scale(1.5);
   cursor: pointer;
 }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Task from "./Task";
 import TaskInput from "./TaskInput";
 
@@ -60,7 +60,7 @@ function Dashboard() {
     addressOrName: CONTRACT_ADDRESS,
     contractInterface: contractInterface["abi"],
     functionName: "retrieveTasks",
-    args: address,
+    args: [address],
     onSuccess(data) {
       const values = data?.map( ({content, isCompleted}) => { return {content: content, isCompleted: isCompleted} } )
       setTasks(values);
@@ -113,7 +113,7 @@ function Dashboard() {
 
 
   return (
-    <section>
+    <section className="dashboard">
       <TaskInput handleTaskCreation={handleTaskCreation} />
 
       <div className="menu">
