@@ -54,11 +54,14 @@ function App() {
       <RainbowKitProvider 
         theme={myTheme}
         chains={chains}>
+
+        {/* Main app */ }
         <div className="App">
           <Header/>
           <Dashboard/>
           <Backdrop />
         </div>
+
       </RainbowKitProvider>
     </WagmiConfig>
   );

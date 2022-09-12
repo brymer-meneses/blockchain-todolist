@@ -7,8 +7,8 @@
 
 .menu button {
   box-shadow: 3px 3px 10px black;
-  width: 15vh;
-  height: 6vh;
+  width: 5rem;
+  height: 2rem;
   border: none;
   border-radius: 0.5rem;
   margin: 0 0.3rem;
@@ -19,8 +19,8 @@
 
 .menu .button-disabled {
   background-color: transparent;
-  border: 2px solid var(--border);
-  color: var(--border);
+  border: 2px solid var(--gray);
+  color: var(--gray);
   box-shadow: none;
 }
 

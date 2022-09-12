@@ -22,7 +22,7 @@ function TaskInput(props: props) {
   }
 
   return <section className="task-input-container">
-    <h1 className="task-input-text"> Create Task </h1>
+    <h3> Create Task </h3>
     <div className="task-input">
       <input 
         onChange={handleInput}
@@ -30,7 +30,7 @@ function TaskInput(props: props) {
         type="text"/>
       <FontAwesomeIcon 
         onClick={handleTaskAdd}
-        className="task-add-icon" icon={faPlus} />
+        className="add-icon" icon={faPlus} />
     </div>
   </section>;
 }
