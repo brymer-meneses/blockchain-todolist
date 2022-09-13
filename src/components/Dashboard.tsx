@@ -11,14 +11,14 @@ import contractInterface from "../../build/contracts/TodoList.json"
 
 const CONTRACT_ADDRESS = "0xCA2ca507FdcdD212bDB3eECda2C1C10373524aF9";
 
-enum TaskOpKind {
-  CREATE=0,
-  DELETE=1,
-  SWAP=2,
-  FINISH=3,
-}
+const TaskOp = {
+  kind : {
+    CREATE: 0,
+    DELETE: 1,
+    SWAP: 2,
+    FINISH: 3,
+  },
 
-class TaskOp {
   // struct TaskOperation {
   //      Operation op;
   //      uint taskId;
@@ -26,21 +26,10 @@ class TaskOp {
   //      string content;
   //   }
 
-  static Create(id: number, content: string, )  {
-    return [TaskOpKind.CREATE, id,  0, content, ];
-  }
-
-  static Swap(id1: number, id2: number)  {
-    return [TaskOpKind.SWAP, id1,  id2, ""];
-  }
-
-  static Delete(id: number)  {
-    return [TaskOpKind.DELETE, id, 0,  ""];
-  }
-
-  static Finish(id: number)  {
-    return [TaskOpKind.FINISH, id,  0, ""];
-  }
+  create :  (id: number, content: string, )  => [TaskOp.kind.CREATE, id,  0, content],
+  swap   :  (id1: number, id2: number)       => [TaskOp.kind.SWAP, id1,  id2, ""],
+  delete :  (id: number)                     => [TaskOp.kind.DELETE, id, 0,  ""],
+  finish :  (id: number)                     => [TaskOp.kind.FINISH, id,  0, ""],
 }
 
 function Dashboard() {
@@ -80,12 +69,12 @@ function Dashboard() {
 
   const handleTaskCreation = (content: string) => {
     setTasks([...tasks, { content, isCompleted: false }])
-    setUnsavedOps([...unsavedOps, TaskOp.Create(tasks.length, content)]);
+    setUnsavedOps([...unsavedOps, TaskOp.create(tasks.length, content)]);
   }
 
   const handleTaskDeletion = (index: number) => {
     setTasks(tasks.filter((_, idx) => index !== idx))
-    setUnsavedOps([...unsavedOps, TaskOp.Delete(index)]);
+    setUnsavedOps([...unsavedOps, TaskOp.delete(index)]);
   }
 
   const handleTaskToggleCompletion = (index: number) => {
@@ -93,14 +82,14 @@ function Dashboard() {
     // check for toggle completion operation in the unsaved operations array,
     // if it exists delete that operation from the unsaved operations list
 
-    const unsavedToggleCompletion = unsavedOps.find( op => op[0] === TaskOpKind.FINISH && op[1] === index);
+    const unsavedToggleCompletion = unsavedOps.find( op => op[0] === TaskOp.kind.FINISH && op[1] === index);
 
     if (unsavedToggleCompletion) {
       setUnsavedOps(unsavedOps.filter(op => op != unsavedToggleCompletion))
       return
     } 
 
-    setUnsavedOps([...unsavedOps, TaskOp.Finish(index)]);
+    setUnsavedOps([...unsavedOps, TaskOp.finish(index)]);
     setTasks(tasks.map((task, idx) => idx === index ? { ...task, isCompleted: true } : task))
 
   }
